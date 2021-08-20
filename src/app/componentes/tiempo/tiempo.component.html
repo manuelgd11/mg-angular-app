@@ -1,18 +1,43 @@
-
 <div class="container"> <!--Clase css de bootstrap: container (contenedor)-->
+    <br>
     <h4>Consulta del tiempo por ciudad</h4>
     <!--div para contener el formulario-->
-<div>
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
+    <div class="col-lg-6 alineacion card"> <!-- Clase bootstrap para definir el tamaño del elemento-->
+        <!--Declaracion para el uso de la clase formGroup y de la directiva "ngSubmit" que manejará 
+        el valor que se envíe en el formulario con la llamada del método consultar-->
+        <form [formGroup]="formulario" (ngSubmit)="consultar()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ciudad</label>
+                <!--La propiedad nos permite hacer el match entre mi objeto formulario y los campos de html,
+                por eso es importante que cada input tenga su nombre/id-->
+                <input type="text" class="form-control" id="text-ciudad"
+                formControlName="ciudad">
+                <!--Directiva "*ngIf" que es una condición lógica que debe cumplirse cuando sea verdadera-->
+                <!--Secuencia lógica de ngIf: 1. Obtengo el campo ciudad del formulario y verifico si es inválido
+                                              2. Pregunto si el campo ciudad en el formulario fué tocado-->
+                <p class="text-danger"
+                *ngIf="formulario.controls.ciudad.invalid && formulario.controls.ciudad.touched">Porfavor solo escribe letras</p>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Código de ciudad</label>
+                <input type="text" class="form-control" id="text-codigo" formControlName="codigo">
+                <p class="text-danger"
+                *ngIf="formulario.controls.ciudad.invalid && formulario.controls.ciudad.touched">Porfavor solo escribe letras</p>
+            </div>
+                <button type="submit" class="btn btn-primary alineacion">Consultar</button>
+        </form>
+    </div>
+    <div class="col-lg-6 alineacion">
+        <div class="card">
+            <div class="card-body">
+              <!--Se genera una lista-->
+              <ul>
+                  <li>Temperatura: </li>
+                  <li>Ciudad: </li>
+                  <li>Latitud: </li>
+                  <li>Longitud: </li>
+              </ul>
+            </div>
+          </div>
+    </div>
 </div>
