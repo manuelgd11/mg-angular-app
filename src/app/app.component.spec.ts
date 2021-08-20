@@ -1,3 +1,4 @@
+/*Aquí se programan pruebas unitarias del componente*/
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
