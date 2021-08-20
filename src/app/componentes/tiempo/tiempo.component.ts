@@ -10,6 +10,14 @@ import { TemperaturaService } from 'src/app/servicios/temperatura.service';
 export class TiempoComponent implements OnInit {
 
   formulario!: FormGroup; /*Declaración de objeto formulario*/
+  /*Variables para almacenar la respuesta del servicio o api del tiempo*/
+  estado_tiempo: any;
+  nombre: any;
+  temperatura: any;
+  humedad: any;
+  latitud: any;
+  longitud: any;
+  descripcion: any;
 
   /*Inyeccion de clase formbuilder en el constructor que permite hacer una serie de acciones 
   en este formulario, como validaciones, match y controlar cada uno de los campos del formulario*/
@@ -42,6 +50,13 @@ export class TiempoComponent implements OnInit {
     this.tiempo.getEstadoTiempo(this.formulario.controls.ciudad.value, this.formulario.controls.codigo.value)
     /*Me suscribo para acceder al observable retornado por el método que contiene la respuesta e 
     información necesaria*/.subscribe(respuesta =>{
+        this.estado_tiempo = respuesta;
+        this.nombre = this.estado_tiempo.name;
+        this.temperatura = this. estado_tiempo.main.temp;
+        this.humedad = this.estado_tiempo.main.humidity;
+        this.latitud = this.estado_tiempo.coord.lat;
+        this.longitud = this.estado_tiempo.coord.lon;
+        this.descripcion = this.estado_tiempo.weather[0].description;
         console.log("respuesta", respuesta);
     });
   }
