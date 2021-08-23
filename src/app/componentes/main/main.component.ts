@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  ciudades = ['Ciudad de Panamá','Arraiján','Penonomé','Chitré','Santiago'];
+
   constructor() { }
 
   ngOnInit(): void {

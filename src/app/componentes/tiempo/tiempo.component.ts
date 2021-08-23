@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TemperaturaService } from 'src/app/servicios/temperatura.service';
@@ -18,6 +19,9 @@ export class TiempoComponent implements OnInit {
   latitud: any;
   longitud: any;
   descripcion: any;
+  verError!: boolean; /*Variable booleana que indica si muestra o no el error en html*/
+  msjError!: String;
+  fecha = new Date(); 
 
   /*Inyeccion de clase formbuilder en el constructor que permite hacer una serie de acciones 
   en este formulario, como validaciones, match y controlar cada uno de los campos del formulario*/
@@ -45,6 +49,7 @@ export class TiempoComponent implements OnInit {
   }
   /*Este método consumirá el servicio de Temperatura*/
   consultar(){
+    this.verError = false;
     console.log("Formulario: ", this.formulario);
     /*Llamamos al método getEstadoTiempo que recibe 2 parámetros desde el formulario*/
     this.tiempo.getEstadoTiempo(this.formulario.controls.ciudad.value, this.formulario.controls.codigo.value)
@@ -57,7 +62,13 @@ export class TiempoComponent implements OnInit {
         this.latitud = this.estado_tiempo.coord.lat;
         this.longitud = this.estado_tiempo.coord.lon;
         this.descripcion = this.estado_tiempo.weather[0].description;
+        
         console.log("respuesta", respuesta);
-    });
+    },
+    /*Sentencia para capturar un error de servicio o método que se esté consumiendo*/
+    error => {
+      this.verError = true;
+      this.msjError = "Error al consultar el tiempo. Coloque un nombre y código de ciudad válidos."
+    })
   }
 }
