@@ -1,8 +1,27 @@
 <br>
-<div class="container">
+<div *ngIf="verCiudad" class="container">
 <!--Con la directiva ngFor podemos recorrer una lista-->
 <p>Ciudades</p>
     <ul *ngFor="let posicion of ciudades">
         <li>{{posicion}}</li>
     </ul>
+</div>
+<div class="container">
+    <!--ngIf para determinar si es verdadero o falso-->
+    <!--Directiva "click" para que cuando se toque el botón ejecute una acción-->
+    <button class="btn btn-primary" (click)="mostrar()" *ngIf="verCiudad">Esconder ciudades</button>
+    <button class="btn btn-primary" (click)="mostrar()" *ngIf="!verCiudad">Mostrar ciudades</button>
+</div>
+<br>
+<div class="container">
+    <!--ngClass permite cambiar/agrupar nuevas clases css a nuestro HTML, muestra una de dos clases
+    dependiendo de un valor booleano-->
+    <h4>NgClass></h4>
+    <br>
+    <div [ngClass]="{'alert-primary': cambiarCss, 'alert-warning': !cambiarCss}" class="alert" role="alert">
+        Estilos de alerta
+    </div>
+    <div>
+        <button class="btn btn-primary" (click)="cambioCss()">Cambiar estilo</button>
+    </div>
 </div>
