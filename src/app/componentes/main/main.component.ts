@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /*Método para alternar el valor de verCiudad dependiendo de una acción ejecutada*/
+  /*Método para alternar el valor de verCiudad dependiendo de una acción ejecutada en el boton*/
   mostrar(){this.verCiudad = !this.verCiudad;}
   cambioCss(){this.cambiarCss = !this.cambiarCss;}
 }
